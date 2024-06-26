@@ -1,6 +1,6 @@
 /**
- *  รหัสประจำตัวนิสิต 6510405814
- *  ชื่อ : Sornchai Somsakul
+ * รหัสประจำตัวนิสิต 6510405814
+ * ชื่อ : Sornchai Somsakul
  */
 
 import java.util.ArrayList;
@@ -34,41 +34,29 @@ public class MGame {
             throw new Error("Player need to between 2 and 8");
         }
 
-        createGame(playerAmount);
+        for (int player = 1; player <= playerAmount; player++) {
+            this.players.add(new Player("Player " + player, board, dice));
+        }
 
         System.out.print("Enter round amount : ");
         int roundAmount = scanner.nextInt();
 
         if (roundAmount < 1) {
-            throw new Error("Round need to be more than 1 round");
+            throw new Error("Round need to be at least 1 round");
         }
 
         for (int round = 0; round < roundAmount; round++) {
             System.out.println("ROUND : " + (round + 1));
-            for (int player = 0; player < players.size(); player++) {
-                playRound();
-            }
+            playRound();
             System.out.println("----------------");
         }
 
     }
 
-
-    private void createGame(int playerAmount) {
-        for (int player = 1; player <= playerAmount; player++) {
-            this.players.add(new Player("Player " + player, board));
-        }
-    }
-
     private void playRound() {
-        int playerAmount = players.size();
-        int currentRound = roundCnt % playerAmount;
-
-        Player currentPlayer = players.get(currentRound);
-
-        currentPlayer.takeTurn(dice);
-        System.out.println(currentPlayer.getName());
-        System.out.println("- " + currentPlayer.getPiece().getLocation().getName());
-        roundCnt++;
+        for (Player currentPlayer : players) {
+            currentPlayer.takeTurn();
+            roundCnt++;
+        }
     }
 }

@@ -14,7 +14,7 @@ public class Board {
     Board() {
         squares = new ArrayList<>();
 
-        for (int i = 1; i <= PIECE_COUNT; i++) {
+        for (int i = 0; i < PIECE_COUNT; i++) {
             squares.add(new Square("Place " + i, i));
         }
     }
